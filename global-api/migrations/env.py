@@ -18,6 +18,16 @@ if config.config_file_name is not None:
 
 if os.environ.get("ALEMBIC_URL") is not None:
     config.set_main_option("sqlalchemy.url", os.environ["ALEMBIC_URL"])
+else:
+    # Get environment variables for database connection
+    db_user = os.getenv('CC_GLOBAL_API_DB_USER', 'default_user')
+    db_password = os.getenv('CC_GLOBAL_API_DB_PASSWORD', 'default_password')
+    db_host = os.getenv('CC_GLOBAL_API_DB_HOST', 'localhost')
+    db_name = os.getenv('CC_GLOBAL_API_DB_NAME', 'default_db')
+
+    # Construct the database URL
+    db_url = f'postgresql://{db_user}:{db_password}@{db_host}/{db_name}'
+    config.set_main_option('sqlalchemy.url', db_url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
