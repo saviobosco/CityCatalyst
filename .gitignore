@@ -152,6 +152,7 @@ global-api/data/**
 
 #Python virtual env
 global-api/env
+global-api/venv
 
 #Pycharm
-/global-api/.idea/
+/global-api/.idea 
